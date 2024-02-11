@@ -4,4 +4,41 @@ FROM `my-data-project-1054.Car_sales.Car_data`
 GROUP BY Company
 ORDER BY Cars_Sold DESC;
 
+-- Column name change
+ALTER TABLE `my-data-project-1054.Car_sales.Car_data`  RENAME COLUMN Price____ TO Price;
 
+-- The total sales and number of cars sold by gender:
+SELECT Gender, SUM(Price) AS Total_Sales, COUNT(*) AS Number_of_Cars
+FROM `my-data-project-1054.Car_sales.Car_data`
+GROUP BY Gender;
+
+-- Total sales per dealer region:
+SELECT Dealer_Region, SUM(Price) AS Total_Sales
+FROM `my-data-project-1054.Car_sales.Car_data`
+GROUP BY dealer_region;
+
+-- Number of cars sold per model:
+SELECT Model, COUNT(*) AS Quantity_Sold
+FROM `my-data-project-1054.Car_sales.Car_data`
+GROUP BY Model
+ORDER BY Quantity_sold DESC;
+
+
+-- Monthly Sales Trends
+SELECT EXTRACT(YEAR FROM Date) AS Year, EXTRACT(MONTH FROM Date) AS Month, COUNT(*) AS Number_of_Sales, SUM(Price) AS Total_Revenue
+FROM `my-data-project-1054.Car_sales.Car_data`
+GROUP BY Year, Month
+ORDER BY Year, Month;
+
+-- Sales Performance of Cars within Specific Price Ranges
+SELECT 
+  CASE
+    WHEN Price < 20000 THEN 'Below 20k'
+    WHEN Price BETWEEN 20000 AND 40000 THEN '20k-40k'
+    WHEN Price BETWEEN 40001 AND 60000 THEN '40k-60k'
+    ELSE 'Above 60k'
+  END AS Price_Range,
+  COUNT(*) AS Number_of_Cars_Sold,
+FROM `my-data-project-1054.Car_sales.Car_data`
+GROUP BY Price_Range
+ORDER BY Number_of_Cars_Sold DESC;
