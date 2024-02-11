@@ -1,0 +1,7 @@
+-- The number of cars sold by each car company:
+SELECT Company, COUNT(*) AS Cars_Sold
+FROM `my-data-project-1054.Car_sales.Car_data`
+GROUP BY Company
+ORDER BY Cars_Sold DESC;
+
+
