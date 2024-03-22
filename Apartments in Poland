@@ -1,3 +1,5 @@
+### My First project
+*** SQL query
 SELECT 
   rent_tbl.city, 
   ROUND(AVG(rent_tbl.price), 2) AS avg_rent_price,
